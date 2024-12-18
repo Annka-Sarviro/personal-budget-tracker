@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./budget-tracker-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app # Синхронізація коду
+      - /app/node_modules # Виключення node_modules контейнера
+    command: npm run dev # Запуск в режимі розробки
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./budget-tracker-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app # Синхронізація коду
+      - /app/node_modules # Виключення node_modules контейнера
+    command: npm run start:dev # Запуск в режимі розробки
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
