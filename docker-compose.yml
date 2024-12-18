@@ -7,10 +7,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    environment:
+      - "NEXT_WEBPACK_USEPOLLING=1"
     volumes:
-      - ./frontend:/app # Синхронізація коду
-      - /app/node_modules # Виключення node_modules контейнера
-    command: npm run dev # Запуск в режимі розробки
+      - ./budget-tracker-frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
     depends_on:
       - backend
 
@@ -20,10 +23,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
+    environment:
+      - "DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_DATABASE}"
     volumes:
-      - ./backend:/app # Синхронізація коду
-      - /app/node_modules # Виключення node_modules контейнера
-    command: npm run start:dev # Запуск в режимі розробки
+      - ./budget-tracker-backend:/app
+      - /app/node_modules
+    command: npm run start:dev
     depends_on:
       - db
 
@@ -31,9 +36,9 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: app_db
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
