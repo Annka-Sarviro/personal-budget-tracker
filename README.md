@@ -41,24 +41,7 @@ cd personal-budget-tracker
 
 ## **2. Setup Environment Variables**
 
-### **Backend Environment Variables**
-
-Create a `.env` file in the `backend/` directory with the following content:
-
-```env
-DATABASE_URL=postgres://user:password@postgres:5432/budget_tracker
-PORT=3001
-```
-
-### **Frontend Environment Variables**
-
-Create a `.env.local` file in the `frontend/` directory with the following content:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
-```
-
----
+Create a `.env` file in the `/` same as .env.example
 
 ## **3. Docker Setup**
 
