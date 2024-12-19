@@ -9,6 +9,7 @@ services:
       - "3000:3000"
     environment:
       - "NEXT_WEBPACK_USEPOLLING=1"
+      - "NEXT_BACKEND_URL=http://backend:3001"
     volumes:
       - ./budget-tracker-frontend:/app
       - /app/node_modules

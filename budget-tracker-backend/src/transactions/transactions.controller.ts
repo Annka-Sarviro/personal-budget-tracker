@@ -31,6 +31,11 @@ export class TransactionsController {
     });
   }
 
+  @Get('/total')
+  asyncGetTotal() {
+    return this.transactionsService.getTotal();
+  }
+
   @Post()
   async create(@Body() createTransactionDto: CreateTransactionDto) {
     return this.transactionsService.create(createTransactionDto);

@@ -14,6 +14,30 @@ export class TransactionsService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
+  async getTotal() {
+    const income = await this.transactionRepository
+      .createQueryBuilder('transaction')
+      .select('SUM(transaction.amount)', 'sum')
+      .where('transaction.type = :type', { type: 'income' })
+      .getRawOne();
+
+    const expense = await this.transactionRepository
+      .createQueryBuilder('transaction')
+      .select('SUM(transaction.amount)', 'sum')
+      .where('transaction.type = :type', { type: 'expense' })
+      .getRawOne();
+
+    const incomeSum = parseFloat(income.sum) || 0;
+    const expenseSum = parseFloat(expense.sum) || 0;
+    const totalBalance = incomeSum - expenseSum;
+
+    return {
+      income: incomeSum,
+      expense: expenseSum,
+      totalBalance,
+    };
+  }
+
   async getAll(filters: {
     category_id?: number;
     date?: string;
