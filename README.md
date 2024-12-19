@@ -24,9 +24,9 @@ Follow the steps below to set up and run the project on your local machine.
 
 Make sure the following tools are installed on your system:
 
-- [Docker](https://www.docker.com/products/docker-desktop)  
-- [Node.js (v18+)](https://nodejs.org/)  
-- [npm](https://www.npmjs.com/)  
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Node.js (v18+)](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
 
 ---
 
@@ -88,6 +88,7 @@ The backend is built with **NestJS** and uses **TypeORM** to interact with Postg
 #### **Key Commands**
 
 - Install dependencies:
+
   ```bash
   cd backend
   npm install
@@ -101,6 +102,7 @@ The backend is built with **NestJS** and uses **TypeORM** to interact with Postg
 #### **API Endpoints**
 
 - **Categories**
+
   - `GET /categories` – Fetch all categories.
   - `POST /categories` – Add a new category.
 
@@ -117,12 +119,14 @@ The frontend is built with **Next.js** and consumes the backend API.
 #### **Key Commands**
 
 - Install dependencies:
+
   ```bash
   cd frontend
   npm install
   ```
 
 - Run the frontend locally (without Docker):
+
   ```bash
   npm run dev
   ```
@@ -155,6 +159,7 @@ To inspect or manage the database, you can use tools like:
 You can add categories like `income` and `expense` using the `/categories` endpoint.
 
 Example **POST /categories** request body:
+
 ```json
 {
   "name": "Food",
@@ -167,6 +172,7 @@ Example **POST /categories** request body:
 You can add transactions using the `/transactions` endpoint.
 
 Example **POST /transactions** request body:
+
 ```json
 {
   "amount": 50,
@@ -182,12 +188,12 @@ Example **POST /transactions** request body:
 
 ### **Modify Backend Code**
 
-- The backend code is located in the `backend/` folder. 
+- The backend code is located in the `backend/` folder.
 - Update entities, DTOs, or services as needed for custom business logic.
 
 ### **Modify Frontend Code**
 
-- The frontend code is located in the `frontend/` folder. 
+- The frontend code is located in the `frontend/` folder.
 - Update pages or components to add new features or improve the UI.
 
 ---
@@ -198,7 +204,6 @@ Example **POST /transactions** request body:
 
 - **Port Conflicts**:  
   If ports (3000 or 3001) are in use, update the `docker-compose.yml` file to use different ports.
-  
 - **Database Connection Issues**:  
   Ensure that the database container is running and that the `DATABASE_URL` in the `.env` file is correct.
 
@@ -212,6 +217,7 @@ Example **POST /transactions** request body:
 ### **Backend Testing**
 
 Run unit and integration tests for the backend:
+
 ```bash
 cd backend
 npm run test
@@ -220,6 +226,7 @@ npm run test
 ### **Frontend Testing**
 
 Run tests for the frontend:
+
 ```bash
 cd frontend
 npm run test
@@ -230,6 +237,7 @@ npm run test
 ## **10. Stopping the Application**
 
 To stop the Docker containers, run:
+
 ```bash
 docker-compose down
 ```
